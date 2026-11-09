@@ -30,14 +30,14 @@ public class Matricula {
     private LocalDate dataMatricula;
 
 
-    void definirAluno(Aluno aluno){
+    public void definirAluno(Aluno aluno){
         if (aluno == null){
             throw new IllegalArgumentException
                         ("O aluno não pode ser nulo");
         }
         this.aluno = aluno;
     }
-    void definirAula(Aula aula){
+    public void definirAula(Aula aula){
         if (aula==null){
             throw new IllegalArgumentException
                         ("A aula não pode ser nula");
