@@ -57,5 +57,20 @@ public class AulaService {
         }else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"A aula com esse ID não existe");
     }
+
+    @Transactional
+    public AulaResponseDTO update(Long id, AulaRequestDTO dto){
+        Aula aula = aulaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Aula não encontrada"));
+        Instrutor instrutor = instrutorRepository.findById(dto.instrutorId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Instrutor não encontrado"));
+
+        aula.setNome(dto.nome());
+        aula.setHorario(dto.horario());
+        aula.setInstrutor(instrutor);
+
+        aulaRepository.save(aula);
+        return AulaResponseDTO.fromEntity(aula);
+    }
 }
 

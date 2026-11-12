@@ -1,5 +1,6 @@
 package com.academia.api.Controller;
 
+import com.academia.api.DTOS.AulaRequestDTO;
 import com.academia.api.DTOS.AulaResponseDTO;
 import com.academia.api.Service.AulaService;
 import lombok.RequiredArgsConstructor;
@@ -25,4 +26,23 @@ public class AulaController {
     public List<AulaResponseDTO> findAll (){
         return aulaService.findAll();
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public AulaResponseDTO save (@RequestBody AulaRequestDTO dto){
+        return aulaService.save(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        aulaService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+        public AulaResponseDTO update(@PathVariable Long id, @RequestBody AulaRequestDTO dto){
+            return aulaService.update(id, dto);
+        }
+
 }
